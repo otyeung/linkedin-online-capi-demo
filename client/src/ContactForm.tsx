@@ -4,12 +4,7 @@ import './App.css' // Importing styles
 import axios from 'axios'
 import Modal from './Modal' // Assuming you have a Modal component
 
-// Declare analytics function in window object to avoid TypeScript error
-declare global {
-  interface Window {
-    analytics: any
-  }
-}
+declare function gtag(...args: any[]): void
 
 // Define type/interface for form data
 interface FormData {
@@ -113,24 +108,20 @@ const ContactForm: React.FC = () => {
       const lastName = formData.lastName
       const title = formData.title
       const company = formData.company
+
       const countryCode = formData.countryCode
 
-      /* li_fat_id is automatically picked up from url of track or page event.
-      The rest are automatically picked up from identify traits object.
-      The variable names recognised in traits are name, first_name, last_name, title, seniority, website, domain, role, country.
-      country and company are also enriched with our reverse ip look up database */
-      // window.analytics.identify(null, {
-      //   //      li_fat_id: li_fat_id,
-      //   email: userEmail,
-      //   first_name: firstName,
-      //   last_name: lastName,
-      //   title: title,
-      //   company: company,
-      //   country: countryCode,
-      // })
-
-      // Track the form submission event
-      // window.analytics.track('Form Submit')
+      gtag('set', 'user_data', {
+        linkedinFirstPartyId: li_fat_id,
+        sha256_email_address: hashedEmail,
+        address: {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          country: formData.countryCode,
+        },
+        jobTitle: formData.title,
+        companyName: formData.company,
+      })
 
       console.log('Form submitted successfully')
       setSubmissionStatus('success')
