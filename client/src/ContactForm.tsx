@@ -102,17 +102,8 @@ const ContactForm: React.FC = () => {
         formData
       )
 
-      const userEmail = formData.email
-      const li_fat_id = formData.li_fat_id
-      const firstName = formData.firstName
-      const lastName = formData.lastName
-      const title = formData.title
-      const company = formData.company
-
-      const countryCode = formData.countryCode
-
       gtag('set', 'user_data', {
-        linkedinFirstPartyId: li_fat_id,
+        linkedinFirstPartyId: formData.li_fat_id,
         sha256_email_address: hashedEmail,
         address: {
           first_name: formData.firstName,
