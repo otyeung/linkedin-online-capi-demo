@@ -192,7 +192,7 @@ const ContactForm: React.FC = () => {
     <>
       <div className='App'>
         <form className='centered-form' onSubmit={handleSubmit}>
-          <h1 className='form-title'>LinkedIn Online CAPI with Dreamdata</h1>
+          <h1 className='form-title'>LinkedIn Online CAPI Demo</h1>
 
           <label>
             li_fat_id:
