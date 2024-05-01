@@ -17,6 +17,7 @@ interface FormData {
   lastName: string
   firstName: string
   email: string
+  hashEmail: string
   title: string
   company: string
   countryCode: string
@@ -31,6 +32,7 @@ const initialFormData: FormData = {
   lastName: 'John',
   firstName: 'Doe',
   email: 'john.doe@example.com',
+  hashEmail: '',
   title: 'Engineer',
   company: 'Acme Inc',
   countryCode: 'US',
@@ -94,6 +96,12 @@ const ContactForm: React.FC = () => {
     e.preventDefault()
 
     try {
+      // Hash email before submission
+      const hashedEmail = await hashData(formData.email)
+      setFormData((prevData) => ({
+        ...prevData,
+        hashEmail: hashedEmail,
+      }))
       await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/submit-google-form`,
         formData
@@ -139,9 +147,6 @@ const ContactForm: React.FC = () => {
       ...prevData,
       [e.target.name]: e.target.value,
     })) // Using functional update
-    window.document.getElementById('hashEmail').value = hashData(
-      window.document.getElementById('email').value
-    )
   }
 
   const closeModal = () => {
@@ -208,6 +213,7 @@ const ContactForm: React.FC = () => {
               type='hidden'
               name='hashEmail'
               id='hashEmail'
+              value={formData.hashEmail || ''}
               onChange={handleChange}
             />
           </label>
