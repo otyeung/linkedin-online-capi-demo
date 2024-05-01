@@ -102,17 +102,17 @@ const ContactForm: React.FC = () => {
         formData
       )
 
-      // gtag('set', 'user_data', {
-      //   linkedinFirstPartyId: formData.li_fat_id,
-      //   sha256_email_address: hashedEmail,
-      //   address: {
-      //     first_name: formData.firstName,
-      //     last_name: formData.lastName,
-      //     country: formData.countryCode,
-      //   },
-      //   jobTitle: formData.title,
-      //   companyName: formData.company,
-      // })
+      gtag('set', 'user_data', {
+        linkedinFirstPartyId: formData.li_fat_id,
+        sha256_email_address: hashedEmail,
+        address: {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          country: formData.countryCode,
+        },
+        jobTitle: formData.title,
+        companyName: formData.company,
+      })
 
       console.log('Form submitted successfully')
       setSubmissionStatus('success')
