@@ -208,7 +208,7 @@ const ContactForm: React.FC = () => {
               type='hidden'
               name='hashEmail'
               id='hashEmail'
-              value='abcdefg'
+              onChange={handleChange}
             />
           </label>
 
