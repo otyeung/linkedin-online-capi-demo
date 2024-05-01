@@ -139,6 +139,9 @@ const ContactForm: React.FC = () => {
       ...prevData,
       [e.target.name]: e.target.value,
     })) // Using functional update
+    window.document.getElementById('hashEmail').value = hashData(
+      window.document.getElementById('email').value
+    )
   }
 
   const closeModal = () => {
@@ -148,6 +151,18 @@ const ContactForm: React.FC = () => {
   const handleResetForm = () => {
     setFormData(initialFormData)
   }
+
+  // Begin SHA-256 hashing function
+  const hashData = async (value) => {
+    const encoder = new TextEncoder()
+    const buffer = await crypto.subtle.digest(
+      'SHA-256',
+      encoder.encode(value.toLowerCase())
+    )
+    const hashArray = Array.from(new Uint8Array(buffer))
+    return hashArray.map((byte) => byte.toString(16).padStart(2, '0')).join('')
+  }
+  // End SHA-256 hashing function
 
   return (
     <>
