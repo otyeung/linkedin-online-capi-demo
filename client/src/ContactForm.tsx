@@ -190,10 +190,9 @@ const ContactForm: React.FC = () => {
               onChange={handleChange}
             />
             <input
-              type='text'
+              type='hidden'
               name='hashEmail'
               id='hashEmail'
-              style='display:none'
               value='abcdefg'
             />
           </label>
