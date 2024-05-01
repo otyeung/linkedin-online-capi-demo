@@ -142,11 +142,30 @@ const ContactForm: React.FC = () => {
     }
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     [e.target.name]: e.target.value,
+  //   })) // Using functional update
+  // }
+
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+
+    // Update form data
     setFormData((prevData) => ({
       ...prevData,
-      [e.target.name]: e.target.value,
-    })) // Using functional update
+      [name]: value,
+    }))
+
+    // Calculate hash for email if the email field is changing
+    if (name === 'email') {
+      const hashedEmail = await hashData(value)
+      setFormData((prevData) => ({
+        ...prevData,
+        hashEmail: hashedEmail,
+      }))
+    }
   }
 
   const closeModal = () => {
